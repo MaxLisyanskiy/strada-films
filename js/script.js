@@ -1,28 +1,40 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const width = window.innerWidth,
-        height = window.innerHeight,
-        canvas = document.getElementById('canvas');
+	let SCENE;
+	let CAMERA;
+	let RENDERER;
+	let LOADING_MANAGER;
+	let IMAGE_LOADER;
+	let OBJ_LOADER;
+	let CONTROLS;
+	let MOUSE;
+	let RAYCASTER;
 
-    canvas.setAttribute('width', width);
-    canvas.setAttribute('height', height);
+	let TEXTURE;
+	let OBJECT;
 
-    const renderer = new THREE.WebGLRenderer({canvas: canvas});
-    renderer.setClearColor(0x000000);
+	function initScene() {
+		SCENE = new THREE.Scene();
 
-    const scene = new THREE.Scene();
+		initLights();
+	}
 
-    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 5000);
-    camera.position.set(0, 0, 1000);
+	function initLights() {
+		const ambient = new THREE.AmbientLight(0xffffff, 0.7);
+		SCENE.add(ambient);
 
-    const light = new THREE.AmbientLight(0xffffff);
-    scene.add(light);
+		const directionalLight = new THREE.DirectionalLight(0xffffff);
+		directionalLight.position.set(0, 1, 1);
+		SCENE.add(directionalLight);
+	}
 
-    const geometry = new THREE.SphereGeometry(200, 12, 12);
-    const material = new THREE.MeshBasicMaterial({color: 0x8b00ff, wireframe: true});
-    const mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
+	function initCamera() {
+		CAMERA = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
+		CAMERA.position.z = 100;
+	}
 
-
-    renderer.render(scene, camera);
-
+	function initRenderer() {
+		RENDERER = new THREE.WebGLRenderer({ alpha: true });
+		RENDERER.setPixelRatio(window.devicePixelRatio);
+		RENDERER.setSize(window.innerWidth, window.innerHeight);
+	}
 });
