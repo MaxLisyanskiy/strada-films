@@ -5,7 +5,7 @@ import { FILTERS_SLIDER_MARKS } from '../../shared/filters-mocks';
 export const FilterReleaseYear = () => {
   const [value, setValue] = useState<number[]>([1960, 2000]);
 
-  const handleChange = (event: Event, newValue: number | number[]) => {
+  const handleChange = (_event: Event, newValue: number | number[]) => {
     setValue(newValue as number[]);
   };
 
