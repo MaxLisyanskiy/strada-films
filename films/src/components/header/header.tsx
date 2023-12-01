@@ -8,13 +8,13 @@ import {
 } from '@mui/material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 
-export const Header = () => {
+export const Header = ({ title }: { title: string }) => {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           <Typography variant="h6" noWrap component="h1">
-            Фильмы
+            {title}
           </Typography>
           <Box sx={{ flexGrow: 0 }}>
             <IconButton color="inherit">

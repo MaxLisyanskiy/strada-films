@@ -1,10 +1,4 @@
-export const FILTERS_SORT_BY = [
-  'Популярности',
-  'Цена по возрастанию',
-  'Цена по убыванию',
-  'A-Я',
-  'Я-А',
-];
+export const FILTERS_SORT_BY = ['Популярности', 'Рейтингу'];
 
 export const FILTERS_SLIDER_MARKS = [
   {

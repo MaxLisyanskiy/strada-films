@@ -1,8 +1,6 @@
 import { Box, IconButton, Paper, Typography } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
-import { UserContext, UserContextType } from '../../context/user-context';
-import { getMovieList } from '../../services/api';
-import { IGenre } from '../../services/api.types';
+import { useState } from 'react';
+import { useGetGenres } from '../../services/api-films';
 
 import { FilterSelect } from './filter-select';
 import { FilterReleaseYear } from './filter-release-year';
@@ -15,20 +13,14 @@ import CloseIcon from '@mui/icons-material/Close';
 import classes from './filters.module.scss';
 
 export const Filters = () => {
-  const [genres, setGenres] = useState<IGenre[]>([]);
   const [reset, setReset] = useState<number>(0);
 
-  const { user } = useContext(UserContext) as UserContextType;
-
-  useEffect(() => {
-    getMovieList(user.token).then(({ genres }) => {
-      setGenres(genres ?? []);
-    });
-  }, []); // eslint-disable-line
+  const { genres } = useGetGenres();
 
   const handleResetFilters = () => {
     setReset((prev) => (prev += 1));
   };
+
   return (
     <Paper elevation={1} className={classes.filters}>
       <Box>

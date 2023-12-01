@@ -1,13 +1,21 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import { FormControl, InputLabel, MenuItem } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { FILTERS_SORT_BY } from '../../shared/filters-mocks';
+import {
+  MoviesActionKind,
+  MoviesContext,
+  MoviesContextType,
+} from '../../context/movies-context';
 
 export const FilterSelect = () => {
-  const [selectValue, setSelectValue] = useState<string>(FILTERS_SORT_BY[0]);
+  const { movies, dispatch } = useContext(MoviesContext) as MoviesContextType;
 
   const handleChange = (event: SelectChangeEvent) => {
-    setSelectValue(event.target.value);
+    dispatch({
+      type: MoviesActionKind.SORT_BY,
+      payload: event.target.value,
+    });
   };
 
   return (
@@ -16,7 +24,7 @@ export const FilterSelect = () => {
       <Select
         labelId="select-label"
         id="select"
-        value={selectValue}
+        value={movies.sortBy}
         onChange={handleChange}
         label="Сортировать по:"
       >
