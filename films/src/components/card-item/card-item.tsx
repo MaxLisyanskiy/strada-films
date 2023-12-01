@@ -8,9 +8,9 @@ import {
   Typography,
 } from '@mui/material';
 import StarBorderSharpIcon from '@mui/icons-material/StarBorderSharp';
-import { IMovieItem } from '../../services/api.types';
 import { useNavigate } from 'react-router-dom';
 import { IMG_PATH } from '../../shared/constants';
+import { IMovieItem } from '../../services/api-films/api-films.types';
 
 export const CardItem = ({ itemData }: { itemData: IMovieItem }) => {
   const navigate = useNavigate();

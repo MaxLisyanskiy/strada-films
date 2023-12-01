@@ -1,6 +1,6 @@
 import { Box, IconButton, Paper, Typography } from '@mui/material';
 import { useState } from 'react';
-import { useGetGenres } from '../../services/api-films';
+import { useGetGenres } from '../../services/api-films/api-films';
 
 import { FilterSelect } from './filter-select';
 import { FilterReleaseYear } from './filter-release-year';

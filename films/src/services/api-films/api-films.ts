@@ -1,12 +1,17 @@
 import { useContext, useEffect } from 'react';
-import { MoviesContext, MoviesContextType } from '../context/movies-context';
-import { useApi } from '../hooks/use-api';
-import { FILTERS_SORT_BY } from '../shared/filters-mocks';
-import { IMovieItem, IUseGetGenres, IUseGetMovies } from './api.types';
+import { MoviesContext, MoviesContextType } from '../../context/movies-context';
+import { useApi } from '../../hooks/use-api';
+import { FILTERS_SORT_BY } from '../../shared/filters-mocks';
+import {
+  IGenre,
+  IMovieItem,
+  IUseGetGenres,
+  IUseGetMovies,
+} from './api-films.types';
 
 export const useGetGenres = (): IUseGetGenres => {
   const url = 'https://api.themoviedb.org/3/genre/movie/list?language=ru';
-  const { data, isLoading, error } = useApi(url);
+  const { data, isLoading, error } = useApi<{ genres: IGenre[] }>(url);
   return { genres: data?.genres || [], genresLoading: isLoading, error };
 };
 
@@ -18,7 +23,7 @@ export const useGetMovies = (): IUseGetMovies => {
 
   const isSelectPopular = movies.sortBy === FILTERS_SORT_BY[0];
 
-  const { data, isLoading, error, callApi } = useApi<IMovieItem[]>(
+  const { data, isLoading, error, callApi } = useApi<{ results: IMovieItem[] }>(
     isSelectPopular ? urlForPopular : urlForTopRated,
   );
 

@@ -1,5 +1,5 @@
 import { Autocomplete, Checkbox, TextField } from '@mui/material';
-import { IGenre } from '../../services/api.types';
+import { IGenre } from '../../services/api-films/api-films.types';
 
 // icons
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';

@@ -1,5 +1,5 @@
 import { CircularProgress, Grid } from '@mui/material';
-import { IMovieItem } from '../../services/api.types';
+import { IMovieItem } from '../../services/api-films/api-films.types';
 import { CardItem } from '../card-item/card-item';
 
 interface CardListProps {
