@@ -1,4 +1,4 @@
-import { IMovieItem } from '../api.types';
+import { IMovieItem } from '../api-films/api-films.types';
 
 export interface IDetailedMovie extends IMovieItem {
   belongs_to_collection: {
