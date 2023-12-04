@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format:fix": "prettier . --write",
     "preview": "vite preview",
-    "deploy": "npm run build && npx gh-pages -d dist -e films"
+    "deploy": "npm run build && npx gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",

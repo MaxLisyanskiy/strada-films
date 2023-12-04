@@ -1,3 +1,6 @@
-## Strada - Maraphon
+# React + TypeScript + Vite | FR-5
 
-Frontend Roadmap:  https://strada.one/
+```
+1) npm install
+2) npm run dev
+```
