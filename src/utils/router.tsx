@@ -4,12 +4,12 @@ import { MainPage } from '../page/main-page';
 
 export const routes: RouteObject[] = [
   {
-    path: '/strada-maraphon/films',
+    path: '/strada-films',
     element: <MainPage />,
     // errorElement: <NotFoundPage />, // TODO: release this page later
   },
   {
-    path: '/strada-maraphon/films/:id',
+    path: '/strada-films/:id',
     element: <DetailedPage />,
   },
 ];

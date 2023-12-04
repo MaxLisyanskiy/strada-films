@@ -17,9 +17,7 @@ export const CardItem = ({ itemData }: { itemData: IMovieItem }) => {
 
   return (
     <Card>
-      <CardActionArea
-        onClick={() => navigate(`/strada-maraphon/films/${itemData.id}`)}
-      >
+      <CardActionArea onClick={() => navigate(`/strada-films/${itemData.id}`)}>
         <CardMedia
           sx={{ height: 240 }}
           image={IMG_PATH + itemData.poster_path}

@@ -18,6 +18,7 @@ interface DetailedCardProps {
 export const DetailedCard = (props: DetailedCardProps) => {
   const { details, credits } = props;
   const navigate = useNavigate();
+
   return (
     <Box
       component="section"
@@ -31,7 +32,7 @@ export const DetailedCard = (props: DetailedCardProps) => {
         <IconButton
           size="large"
           sx={{ margin: '22px 0' }}
-          onClick={() => navigate('/strada-maraphon/films')}
+          onClick={() => navigate('/strada-films')}
         >
           <ArrowBackIcon />
         </IconButton>
