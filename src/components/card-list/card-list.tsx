@@ -1,17 +1,27 @@
 import { CircularProgress, Grid } from '@mui/material';
-import { IMovieItem } from '../../services/api-films/api-films.types';
+import {
+  useGetFavoritesList,
+  useGetToggleFavorite,
+} from '../../services/api-favorites/api-favorites';
+import { useGetMovies } from '../../services/api-films/api-films';
 import { CardItem } from '../card-item/card-item';
 
-interface CardListProps {
-  data: IMovieItem[];
-  isLoading: boolean;
-}
+export const CardList = () => {
+  const { movies, moviesLoading } = useGetMovies();
+  const { favorites, callApi } = useGetFavoritesList();
 
-export const CardList = ({ data, isLoading }: CardListProps) => {
+  const { onFetchData } = useGetToggleFavorite();
+
+  const handleToggleFavorite = async (id: number, type: 'add' | 'delete') => {
+    const result = await onFetchData(id, type);
+
+    if (result) callApi();
+  };
+
   return (
     <>
-      {isLoading && <CircularProgress />}
-      {!isLoading && (
+      {moviesLoading && <CircularProgress />}
+      {!moviesLoading && (
         <Grid
           container
           spacing={2}
@@ -21,9 +31,13 @@ export const CardList = ({ data, isLoading }: CardListProps) => {
             paddingBottom: '20px',
           }}
         >
-          {data.map((item) => (
+          {movies.map((item) => (
             <Grid item xs={12} sm={12} md={6} lg={3} key={item.id}>
-              <CardItem itemData={item} />
+              <CardItem
+                itemData={item}
+                favorites={favorites}
+                onToggleFavorite={handleToggleFavorite}
+              />
             </Grid>
           ))}
         </Grid>

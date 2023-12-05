@@ -7,13 +7,29 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
-import StarBorderSharpIcon from '@mui/icons-material/StarBorderSharp';
 import { useNavigate } from 'react-router-dom';
 import { IMG_PATH } from '../../shared/constants';
 import { IMovieItem } from '../../services/api-films/api-films.types';
 
-export const CardItem = ({ itemData }: { itemData: IMovieItem }) => {
+// icons
+import StarBorderSharpIcon from '@mui/icons-material/StarBorderSharp';
+import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
+
+interface CardItemProps {
+  itemData: IMovieItem;
+  favorites: IMovieItem[];
+  onToggleFavorite: (id: number, type: 'add' | 'delete') => void;
+}
+
+export const CardItem = ({
+  itemData,
+  favorites,
+  onToggleFavorite,
+}: CardItemProps) => {
   const navigate = useNavigate();
+
+  const isInFavorite =
+    favorites.filter((item: IMovieItem) => item.id === itemData.id).length > 0;
 
   return (
     <Card>
@@ -53,9 +69,24 @@ export const CardItem = ({ itemData }: { itemData: IMovieItem }) => {
             Рейтинг {Math.ceil(itemData.vote_average)}
           </Typography>
         </Box>
-        <IconButton edge="end" aria-label="rating">
-          <StarBorderSharpIcon fontSize="small" />
-        </IconButton>
+        {isInFavorite ? (
+          <IconButton
+            edge="end"
+            aria-label="rating"
+            color="warning"
+            onClick={() => onToggleFavorite(itemData.id, 'delete')}
+          >
+            <StarOutlinedIcon fontSize="small" />
+          </IconButton>
+        ) : (
+          <IconButton
+            edge="end"
+            aria-label="rating"
+            onClick={() => onToggleFavorite(itemData.id, 'add')}
+          >
+            <StarBorderSharpIcon fontSize="small" />
+          </IconButton>
+        )}
       </CardContent>
     </Card>
   );

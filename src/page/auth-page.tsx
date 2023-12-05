@@ -44,6 +44,10 @@ export const AuthPage = () => {
           onSetToken(value);
           onSetUser({ id: response.id, username: response.username });
           localStorage.setItem('tmdb-fr5-token', value);
+          localStorage.setItem(
+            'tmdb-fr5-user',
+            JSON.stringify({ id: response.id, username: response.username }),
+          );
           setOpen(false);
           navigate('/strada-films');
         } else {
