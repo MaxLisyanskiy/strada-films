@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom';
-import { Layout } from '../components/layout';
 import { DetailedCard } from '../components/detailed-card/detailed-card';
 import {
   useGetMovieCredits,
@@ -12,8 +11,9 @@ export const DetailedPage = () => {
   const { movieDetails, detailsLoading } = useGetMovieDetailes(id ?? '');
   const { movieCredits, creditsLoading } = useGetMovieCredits(id ?? '');
 
+  // TODO: title={`Фильмы ${movieDetails ? '- ' + movieDetails.title : ''}`
   return (
-    <Layout title={`Фильмы ${movieDetails ? '- ' + movieDetails.title : ''}`}>
+    <>
       {!id && <h1>Фильм не найден!</h1>}
       {id && movieDetails && (
         <DetailedCard
@@ -23,6 +23,6 @@ export const DetailedPage = () => {
           creditsLoading={creditsLoading}
         />
       )}
-    </Layout>
+    </>
   );
 };

@@ -10,12 +10,13 @@ interface IUseApiOptions {
 }
 
 export function useApiOptions(): IUseApiOptions {
-  const { user } = useContext(UserContext) as UserContextType;
+  const { token } = useContext(UserContext) as UserContextType;
+
   return {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: `Bearer ${user.token}`,
+      Authorization: `Bearer ${token.current}`,
     },
   };
 }
