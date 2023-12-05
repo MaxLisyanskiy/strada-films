@@ -26,7 +26,7 @@ export const AuthPage = () => {
   const [value, setValue] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
 
-  const { setToken, setUser } = useContext(UserContext) as UserContextType;
+  const { onSetToken, onSetUser } = useContext(UserContext) as UserContextType;
 
   const handleAuth = () => {
     const options = {
@@ -41,8 +41,8 @@ export const AuthPage = () => {
       .then((response) => response.json())
       .then((response) => {
         if (response?.id) {
-          setToken(value);
-          setUser({ id: response.id, username: response.username });
+          onSetToken(value);
+          onSetUser({ id: response.id, username: response.username });
           localStorage.setItem('tmdb-fr5-token', value);
           setOpen(false);
           navigate('/strada-films');

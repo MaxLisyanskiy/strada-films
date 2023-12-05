@@ -56,14 +56,16 @@ export const DetailedCard = (props: DetailedCardProps) => {
           <Typography variant="h4" component="h2">
             Детали
           </Typography>
-          <Box sx={{ display: 'flex' }}>
-            <Typography component="p" sx={{ width: '200px' }}>
-              Страна
-            </Typography>
-            <Typography component="p">
-              {details.production_countries[0].name}
-            </Typography>
-          </Box>
+          {details.production_countries.length > 0 && (
+            <Box sx={{ display: 'flex' }}>
+              <Typography component="p" sx={{ width: '200px' }}>
+                Страна
+              </Typography>
+              <Typography component="p">
+                {details.production_countries[0].name}
+              </Typography>
+            </Box>
+          )}
           <Box sx={{ display: 'flex' }}>
             <Typography component="p" sx={{ width: '200px' }}>
               Год

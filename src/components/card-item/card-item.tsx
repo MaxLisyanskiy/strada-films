@@ -33,7 +33,16 @@ export const CardItem = ({ itemData }: { itemData: IMovieItem }) => {
         }}
       >
         <Box>
-          <Typography variant="h6" sx={{ height: '70px' }}>
+          <Typography
+            variant="h6"
+            sx={{
+              height: '70px',
+              display: '-webkit-box',
+              WebkitLineClamp: '2',
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+            }}
+          >
             {itemData.title}
           </Typography>
           <Typography
