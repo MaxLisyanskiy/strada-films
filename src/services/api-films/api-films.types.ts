@@ -35,7 +35,7 @@ export interface IUseGetGenres {
 }
 
 export interface IUseGetMovies {
-  movies: IMovieItem[];
+  movies: IMovieItem[] | null;
   moviesLoading: boolean;
   error: unknown;
 }

@@ -1,10 +1,3 @@
-// import { createBrowserRouter, RouteObject, Routes } from 'react-router-dom';
-// import { DetailedPage } from '../page/detailed-page';
-// import { MainPage } from '../page/main-page';
-// import { AuthPage } from '../page/auth-page';
-// import { RequireAuth } from './require-auth';
-// import { Layout } from '../components/layout';
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { RequireAuth } from './require-auth';
 import { Layout } from '../components/layout';

@@ -31,5 +31,5 @@ export const useGetMovies = (): IUseGetMovies => {
     callApi();
   }, [movies.sortBy, movies.page]); //eslint-disable-line
 
-  return { movies: data?.results || [], moviesLoading: isLoading, error };
+  return { movies: data?.results || null, moviesLoading: isLoading, error };
 };

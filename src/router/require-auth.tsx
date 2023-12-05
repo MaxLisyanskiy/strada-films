@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { UserContext, UserContextType } from '../context/user-context';
 
-export const RequireAuth = ({ children }: { children: React.ReactNode }) => {
+export const RequireAuth = ({ children }: { children: JSX.Element }) => {
   const { token, onSetToken, user, onSetUser } = useContext(
     UserContext,
   ) as UserContextType;

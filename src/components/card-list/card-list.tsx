@@ -1,4 +1,4 @@
-import { CircularProgress, Grid } from '@mui/material';
+import { Alert, CircularProgress, Grid } from '@mui/material';
 import {
   useGetFavoritesList,
   useGetToggleFavorite,
@@ -7,7 +7,7 @@ import { useGetMovies } from '../../services/api-films/api-films';
 import { CardItem } from '../card-item/card-item';
 
 export const CardList = () => {
-  const { movies, moviesLoading } = useGetMovies();
+  const { movies, moviesLoading, error } = useGetMovies();
   const { favorites, callApi } = useGetFavoritesList();
 
   const { onFetchData } = useGetToggleFavorite();
@@ -18,16 +18,22 @@ export const CardList = () => {
     if (result) callApi();
   };
 
+  if (error)
+    return (
+      <Alert severity="error" sx={{ width: '100%', height: 'fit-content' }}>
+        Something went wrong
+      </Alert>
+    );
+
   return (
     <>
       {moviesLoading && <CircularProgress />}
-      {!moviesLoading && (
+      {!movies && <p>Opps... Movies list is empty</p>}
+      {movies && (
         <Grid
           container
           spacing={2}
           sx={{
-            height: 'calc(100vh - 80px)',
-            overflow: 'auto',
             paddingBottom: '20px',
           }}
         >

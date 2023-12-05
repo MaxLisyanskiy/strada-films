@@ -20,7 +20,10 @@ export const useApi = <T>(url: string) => {
       const res: T = await request.json();
       setData(res);
     } catch (error: unknown) {
-      setError(error);
+      if (error instanceof Error) {
+        setError(error.message);
+        throw new Error(error.message);
+      }
     }
 
     setIsLoading(false);
