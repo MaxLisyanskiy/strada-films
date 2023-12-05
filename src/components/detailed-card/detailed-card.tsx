@@ -5,19 +5,28 @@ import {
   IDetailedMovie,
 } from '../../services/api-detailed/api-detailed.types';
 import { IMG_PATH } from '../../shared/constants';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from 'react-router-dom';
+import { IMovieItem } from '../../services/api-films/api-films.types';
+
+// icons
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import StarBorderSharpIcon from '@mui/icons-material/StarBorderSharp';
+import StarOutlinedIcon from '@mui/icons-material/StarOutlined';
 
 interface DetailedCardProps {
   details: IDetailedMovie;
   credits: IDetailedCredits | null;
+  favorites: IMovieItem[];
   detailsLoading?: boolean;
   creditsLoading?: boolean;
 }
 
 export const DetailedCard = (props: DetailedCardProps) => {
-  const { details, credits } = props;
+  const { details, credits, favorites } = props;
   const navigate = useNavigate();
+
+  const isInFavorite =
+    favorites.filter((item: IMovieItem) => item.id === details.id).length > 0;
 
   return (
     <Box
@@ -26,9 +35,16 @@ export const DetailedCard = (props: DetailedCardProps) => {
     >
       <img src={IMG_PATH + details.poster_path} alt={details.title} />
       <Box>
-        <Typography variant="h3" component="h1">
-          {details.title} ({details.release_date.slice(0, 4)})
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Typography variant="h4" component="h1" sx={{ marginRight: '10px' }}>
+            {details.title} ({details.release_date.slice(0, 4)})
+          </Typography>
+          {isInFavorite ? (
+            <StarOutlinedIcon fontSize="small" color="warning" />
+          ) : (
+            <StarBorderSharpIcon fontSize="small" />
+          )}
+        </Box>
         <IconButton
           size="large"
           sx={{ margin: '22px 0' }}
