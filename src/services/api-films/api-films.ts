@@ -1,13 +1,7 @@
-import { useContext, useEffect } from 'react';
-import { MoviesContext, MoviesContextType } from '../../context/movies-context';
 import { useApi } from '../../hooks/use-api';
 import { FILTERS_SORT_BY } from '../../shared/filters-mocks';
-import {
-  IGenre,
-  IMovieItem,
-  IUseGetGenres,
-  IUseGetMovies,
-} from './api-films.types';
+import { ApiOptions } from '../api-options';
+import { IGenre, IMoviesResponse, IUseGetGenres } from './api-films.types';
 
 export const useGetGenres = (): IUseGetGenres => {
   const url = 'https://api.themoviedb.org/3/genre/movie/list?language=ru';
@@ -15,21 +9,53 @@ export const useGetGenres = (): IUseGetGenres => {
   return { genres: data?.genres || [], genresLoading: isLoading, error };
 };
 
-export const useGetMovies = (): IUseGetMovies => {
-  const { movies } = useContext(MoviesContext) as MoviesContextType;
+// export const useGetMovies = (): IUseGetMovies => {
+//   const { movies } = useContext(MoviesContext) as MoviesContextType;
 
-  const urlForPopular = `https://api.themoviedb.org/3/movie/popular?language=ru&page=${movies.page}`;
-  const urlForTopRated = `https://api.themoviedb.org/3/movie/top_rated?language=ru&page=${movies.page}`;
+//   const urlForPopular = `https://api.themoviedb.org/3/movie/popular?language=ru&page=${movies.page}`;
+//   const urlForTopRated = `https://api.themoviedb.org/3/movie/top_rated?language=ru&page=${movies.page}`;
 
-  const isSelectPopular = movies.sortBy === FILTERS_SORT_BY[0];
+//   const isSelectPopular = movies.sortBy === FILTERS_SORT_BY[0];
 
-  const { data, isLoading, error, callApi } = useApi<{ results: IMovieItem[] }>(
+//   const { data, isLoading, error, callApi } = useApi<{ results: IMovieItem[] }>(
+//     isSelectPopular ? urlForPopular : urlForTopRated,
+//   );
+
+//   useEffect(() => {
+//     callApi();
+//   }, [movies.sortBy, movies.page]); //eslint-disable-line
+
+//   return { movies: data?.results || null, moviesLoading: isLoading, error };
+// };
+
+export const getMovies = async (
+  page: number,
+  sortBy: string,
+  token: string,
+): Promise<IMoviesResponse> => {
+  const urlForPopular = `https://api.themoviedb.org/3/movie/popular?language=ru&page=${page}`;
+  const urlForTopRated = `https://api.themoviedb.org/3/movie/top_rated?language=ru&page=${page}`;
+
+  const isSelectPopular = sortBy === FILTERS_SORT_BY[0];
+
+  const response = await fetch(
     isSelectPopular ? urlForPopular : urlForTopRated,
+    ApiOptions(token),
   );
+  const result: IMoviesResponse = await response.json();
 
-  useEffect(() => {
-    callApi();
-  }, [movies.sortBy, movies.page]); //eslint-disable-line
+  return result;
+};
 
-  return { movies: data?.results || null, moviesLoading: isLoading, error };
+export const searchMovies = async (
+  query: string,
+  page: number,
+  token: string,
+): Promise<IMoviesResponse> => {
+  const url = `https://api.themoviedb.org/3/search/movie?language=ru&query=${query}&page=${page}`;
+
+  const response = await fetch(url, ApiOptions(token));
+  const result: IMoviesResponse = await response.json();
+
+  return result;
 };

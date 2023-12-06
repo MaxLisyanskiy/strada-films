@@ -1,5 +1,4 @@
-import { useContext } from 'react';
-import { UserContext, UserContextType } from '../context/user-context';
+import { useUserContext } from './use-context';
 
 interface IUseApiOptions {
   method: string;
@@ -10,7 +9,7 @@ interface IUseApiOptions {
 }
 
 export function useApiOptions(): IUseApiOptions {
-  const { token } = useContext(UserContext) as UserContextType;
+  const { token } = useUserContext();
 
   return {
     method: 'GET',

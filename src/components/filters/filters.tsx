@@ -11,6 +11,7 @@ import { FilterPagination } from './filter-pagination';
 import CloseIcon from '@mui/icons-material/Close';
 
 import classes from './filters.module.scss';
+import { FilterSearch } from './filter-search';
 
 export const Filters = () => {
   const [reset, setReset] = useState<number>(0);
@@ -40,6 +41,7 @@ export const Filters = () => {
           key={reset}
           sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}
         >
+          <FilterSearch />
           <FilterSelect />
           <FilterReleaseYear />
           {genres.length > 0 && <FilterGenres genres={genres} />}

@@ -34,8 +34,22 @@ export interface IUseGetGenres {
   error: unknown;
 }
 
-export interface IUseGetMovies {
-  movies: IMovieItem[] | null;
-  moviesLoading: boolean;
-  error: unknown;
+// export interface IUseGetMovies {
+//   movies: IMovieItem[] | null;
+//   moviesLoading: boolean;
+//   error: unknown;
+// }
+
+// export interface ISearchMovies {
+//   page: number;
+//   results: IMovieItem[];
+//   total_pages: number;
+//   total_results: number;
+// }
+
+export interface IMoviesResponse {
+  page: number;
+  results: IMovieItem[];
+  total_pages: number;
+  total_results: number;
 }
