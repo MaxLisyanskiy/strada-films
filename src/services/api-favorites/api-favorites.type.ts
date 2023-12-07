@@ -6,4 +6,5 @@ export interface IUseGetFavoritesList {
   favoritesLoading: boolean;
   error: unknown;
   callApi: () => void;
+  onToggleFavorite: (newFavorites: IMovieItem[]) => void;
 }

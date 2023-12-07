@@ -9,10 +9,19 @@ import { CardItem } from '../card-item/card-item';
 
 export const CardList = () => {
   const { state, onGetMovies } = useMoviesContext();
-  const { favorites, callApi } = useGetFavoritesList();
+  const { favorites, callApi, onToggleFavorite } = useGetFavoritesList();
   const { onFetchData } = useGetToggleFavorite();
 
   const handleToggleFavorite = async (id: number, type: 'add' | 'delete') => {
+    if (type === 'delete') {
+      const newFavorites = favorites.filter((item) => item.id !== id);
+      onToggleFavorite(newFavorites);
+    } else {
+      const movie = state.movies.find((item) => item.id === id);
+      const newFavorites = movie ? [...favorites, movie] : favorites;
+      onToggleFavorite(newFavorites);
+    }
+
     const result = await onFetchData(id, type);
 
     if (result) callApi();
