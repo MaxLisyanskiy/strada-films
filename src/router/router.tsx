@@ -4,6 +4,7 @@ import { Layout } from '../components/layout';
 import { MainPage } from '../page/main-page';
 import { DetailedPage } from '../page/detailed-page';
 import { AuthPage } from '../page/auth-page';
+import MoviesProvider from '../context/movies-context';
 
 export default function AppRoutes() {
   return (
@@ -12,7 +13,9 @@ export default function AppRoutes() {
         <Route
           element={
             <RequireAuth>
-              <Layout />
+              <MoviesProvider>
+                <Layout />
+              </MoviesProvider>
             </RequireAuth>
           }
         >

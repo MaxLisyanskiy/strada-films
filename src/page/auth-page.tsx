@@ -1,7 +1,9 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Box, Button, Modal, TextField } from '@mui/material';
-import { UserContext, UserContextType } from '../context/user-context';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from 'redux';
+import { setToken, setUser } from '../store/actionCreators';
 
 const style = {
   position: 'absolute' as const,
@@ -22,11 +24,11 @@ const style = {
 export const AuthPage = () => {
   const navigate = useNavigate();
 
+  const dispatch: Dispatch = useDispatch();
+
   const [open, setOpen] = useState<boolean>(true);
   const [value, setValue] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
-
-  const { onSetToken, onSetUser } = useContext(UserContext) as UserContextType;
 
   const handleAuth = () => {
     const options = {
@@ -41,8 +43,8 @@ export const AuthPage = () => {
       .then((response) => response.json())
       .then((response) => {
         if (response?.id) {
-          onSetToken(value);
-          onSetUser({ id: response.id, username: response.username });
+          dispatch(setToken(value));
+          dispatch(setUser({ id: response.id, username: response.username }));
           localStorage.setItem('tmdb-fr5-token', value);
           localStorage.setItem(
             'tmdb-fr5-user',

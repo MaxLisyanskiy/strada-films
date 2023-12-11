@@ -18,12 +18,16 @@
     "@mui/material": "^5.14.18",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^9.0.4",
     "react-router-dom": "^6.20.0",
+    "redux": "^5.0.0",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
+    "@types/react-redux": "^7.1.32",
+    "@types/redux": "^3.6.0",
     "@types/uuid": "^9.0.7",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",

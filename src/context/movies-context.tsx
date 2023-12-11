@@ -1,8 +1,8 @@
 import { createContext, useState } from 'react';
-import { useUserContext } from '../hooks/use-context';
 import { getMovies, searchMovies } from '../services/api-films/api-films';
 import { IMovieItem } from '../services/api-films/api-films.types';
 import { FILTERS_SORT_BY } from '../shared/filters-mocks';
+import useUserSelectors from '../store/selectors/userSelectors';
 
 export type ProviderProps = {
   children: string | JSX.Element | JSX.Element[];
@@ -39,13 +39,13 @@ const initialState: MoviesState = {
 export const MoviesContext = createContext<MoviesContextType | null>(null);
 
 const MoviesProvider = ({ children }: ProviderProps) => {
-  const { token } = useUserContext();
+  const { token } = useUserSelectors();
 
   const [state, setState] = useState<MoviesState>(initialState);
 
   const onGetMovies = async () => {
     setState({ ...state, page: 1, isLoading: true });
-    const result = await getMovies(state.page, state.sortBy, token.current);
+    const result = await getMovies(state.page, state.sortBy, token);
     setState({
       ...state,
       pageTotal: result.total_pages,
@@ -56,7 +56,7 @@ const MoviesProvider = ({ children }: ProviderProps) => {
 
   const onSearchMovies = async (query: string) => {
     setState({ ...state, page: 1, isLoading: true });
-    const result = await searchMovies(query, state.page, token.current);
+    const result = await searchMovies(query, state.page, token);
     setState({
       ...state,
       search: query,
@@ -71,7 +71,7 @@ const MoviesProvider = ({ children }: ProviderProps) => {
       ...state,
       isLoading: true,
     });
-    const result = await getMovies(1, sortBy, token.current);
+    const result = await getMovies(1, sortBy, token);
     setState({
       ...state,
       sortBy,
@@ -91,8 +91,8 @@ const MoviesProvider = ({ children }: ProviderProps) => {
 
     const result =
       state.search.trim() === ''
-        ? await getMovies(newPage, state.sortBy, token.current)
-        : await searchMovies(state.search, newPage, token.current);
+        ? await getMovies(newPage, state.sortBy, token)
+        : await searchMovies(state.search, newPage, token);
     setState({
       ...state,
       page: newPage,

@@ -1,4 +1,4 @@
-import { useUserContext } from './use-context';
+import useUserSelectors from '../store/selectors/userSelectors';
 
 interface IUseApiOptions {
   method: string;
@@ -9,13 +9,13 @@ interface IUseApiOptions {
 }
 
 export function useApiOptions(): IUseApiOptions {
-  const { token } = useUserContext();
+  const { token } = useUserSelectors();
 
   return {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: `Bearer ${token.current}`,
+      Authorization: `Bearer ${token}`,
     },
   };
 }

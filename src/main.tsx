@@ -1,13 +1,12 @@
 import ReactDOM from 'react-dom/client';
 import AppRoutes from './router/router';
-import UserProvider from './context/user-context';
+import { Provider } from 'react-redux';
+import store from './store/store';
+
 import './style/index.scss';
-import MoviesProvider from './context/movies-context';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <UserProvider>
-    <MoviesProvider>
-      <AppRoutes />
-    </MoviesProvider>
-  </UserProvider>,
+  <Provider store={store}>
+    <AppRoutes />
+  </Provider>,
 );
